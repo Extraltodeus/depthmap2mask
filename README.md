@@ -7,15 +7,11 @@ Made as a script for the [AUTOMATIC1111/stable-diffusion-webui](https://github.c
 
 Copy the url of that repository into the extension tab :
 
-![image](https://user-images.githubusercontent.com/15731540/203840132-cd8ce6a2-2843-4a96-8e35-b819af7bc01f.png)
-
-<sub> just ignore the fact that this is the URL of my other repository </sub>
+![image](https://user-images.githubusercontent.com/15731540/204056273-fc27d1cf-48ac-4dc3-b737-95b4b1efd32e.png)
 
 OR copy that repository in your extension folder :
 
 ![image](https://user-images.githubusercontent.com/15731540/203840272-83cccb24-4417-44bc-99df-e45eb5f3360c.png)
-
-<sub> just ignore the fact that this is the name of my other repository. That one will be named depthmap2mask.</sub>
 
 You might need to restart the whole UI. Maybe twice.
 
