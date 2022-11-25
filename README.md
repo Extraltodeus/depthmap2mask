@@ -15,6 +15,10 @@ OR copy that repository in your extension folder :
 
 You might need to restart the whole UI. Maybe twice.
 
+if you are on colab you can also add this line in a code block before starting the UI/after the installation cells :
+
+    !git clone https://github.com/Extraltodeus/depthmap2mask.git /content/stable-diffusion-webui/extensions/depthmap2mask
+
 ## The look
 
 ![image](https://user-images.githubusercontent.com/15731540/204043153-09cbffd9-28ac-46be-ad99-fc7f2c8656a3.png)
