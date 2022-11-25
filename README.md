@@ -41,7 +41,7 @@ The depthmap is in levels of gray. Each pixel has a value in between 0 and 255 d
 
 Or in a more human language, it will give more depth to your depthmaps while removing a lot of information.
 
-Example before/after using the MiDaS-Large model (slider's value around 220):
+Example before/after with the slider's value around 220 and using the MiDaS-Large model:
 
 ![00073--1 0- sampler -85-8 1-ac07d41f-20221125174853](https://user-images.githubusercontent.com/15731540/204044001-4e672bbe-4ff8-46ef-ae87-ec3377e7aa37.png)![00074--1 0- sampler -85-8 1-ac07d41f-20221125174934](https://user-images.githubusercontent.com/15731540/204044306-80c77ba3-3b38-4ea6-941c-f6c6006c8b4e.png)
 
