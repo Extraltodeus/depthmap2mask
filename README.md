@@ -100,7 +100,9 @@ This repository runs with [MiDaS](https://github.com/isl-org/MiDaS).
 ```
 
 ## Examples using different MiDaS models and denoising strength
-![00056-589874964- sampler -32-7-ac07d41f-20221125174017](https://user-images.githubusercontent.com/15731540/204048931-20b19823-bba9-44be-a4ff-4d3ae65dd120.png)![00064-1584461722- sampler -32-7-ac07d41f-20221125174328](https://user-images.githubusercontent.com/15731540/204048940-fada95f2-fcb0-4cf7-ba0c-6a1fd6b904ea.png)![00100-717650490- sampler -84-8 1-ac07d41f-20221125175700](https://user-images.githubusercontent.![00085-335410335- sampler -84-8 1-ac07d41f-20221125175247](https://user-images.githubusercontent.com/15731540/204049122-6f120d14-b0a8-4112-8737-ce2f8cec4b4e.png)
-com/15731540/204048949-a4faf745-e9b5-437e-870d-be8ea7bd4b5d.png)
+![00056-589874964- sampler -32-7-ac07d41f-20221125174017](https://user-images.githubusercontent.com/15731540/204048931-20b19823-bba9-44be-a4ff-4d3ae65dd120.png)![00064-1584461722- sampler -32-7-ac07d41f-20221125174328](https://user-images.githubusercontent.com/15731540/204048940-fada95f2-fcb0-4cf7-ba0c-6a1fd6b904ea.png)
+
+![00100-717650490- sampler -84-8 1-ac07d41f-20221125175700](https://user-images.githubusercontent.com/15731540/204048949-a4faf745-e9b5-437e-870d-be8ea7bd4b5d.png)![00085-335410335- sampler -84-8 1-ac07d41f-20221125175247](https://user-images.githubusercontent.com/15731540/204049122-6f120d14-b0a8-4112-8737-ce2f8cec4b4e.png)
+
 
 I forgot my settings but in the end it's all pretty easy to guess what you need.
