@@ -38,25 +38,30 @@ class Script(scripts.Script):
             save_depthmap = gr.Checkbox(label='Save depth map', value=False)
             override_mask_blur = gr.Checkbox(label='Override mask blur to 0', value=True)
             override_fill = gr.Checkbox(label='Override inpaint to original', value=True)
+            clean_cut     = gr.Checkbox(label='Turn the depthmap into absolute black/white', value=False)
         model_type = gr.Dropdown(label="Model", choices=['dpt_large','midas_v21','midas_v21_small'], value='midas_v21_small', type="index", elem_id="model_type")
         # model_type = gr.Dropdown(label="Model", choices=['dpt_large','dpt_hybrid','midas_v21','midas_v21_small'], value='dpt_large', type="index", elem_id="model_type")
-        return    [save_depthmap,treshold,match_size,net_width,net_height,invert_depth,model_type,override_mask_blur,override_fill]
+        return    [save_depthmap,treshold,match_size,net_width,net_height,invert_depth,model_type,override_mask_blur,override_fill,clean_cut]
 
-    def run(self,p,save_depthmap,treshold,match_size,net_width,net_height,invert_depth,model_type,override_mask_blur,override_fill):
+    def run(self,p,save_depthmap,treshold,match_size,net_width,net_height,invert_depth,model_type,override_mask_blur,override_fill,clean_cut):
         def remap_range(value, minIn, MaxIn, minOut, maxOut):
             if value > MaxIn: value = MaxIn;
             if value < minIn: value = minIn;
             finalValue = ((value - minIn) / (MaxIn - minIn)) * (maxOut - minOut) + minOut;
             return finalValue;
-        def create_depth_mask_from_depth_map(img,save_depthmap,p,treshold):
+        def create_depth_mask_from_depth_map(img,save_depthmap,p,treshold,clean_cut):
             img = copy.deepcopy(img.convert("RGBA"))
             mask_img = copy.deepcopy(img.convert("L"))
             mask_datas = mask_img.getdata()
             datas = img.getdata()
             newData = []
             maxD = max(mask_datas)
+            if clean_cut and treshold == 0:
+                treshold = 128
             for i in range(len(mask_datas)):
-                if mask_datas[i] > treshold:
+                if clean_cut and mask_datas[i] > treshold:
+                    newrgb = 255
+                elif mask_datas[i] > treshold and not clean_cut:
                     newrgb = int(remap_range(mask_datas[i],treshold,255,0,255))
                 else:
                     newrgb = 0
@@ -72,8 +77,8 @@ class Script(scripts.Script):
 
         d_m = sdmg.calculate_depth_maps(p.init_images[0],img_x,img_y,model_type,invert_depth)
 
-        if treshold > 0 :
-            d_m = create_depth_mask_from_depth_map(d_m,save_depthmap,p,treshold)
+        if treshold > 0 or clean_cut:
+            d_m = create_depth_mask_from_depth_map(d_m,save_depthmap,p,treshold,clean_cut)
 
         if save_depthmap:
             images.save_image(d_m, p.outpath_samples, "", p.seed, p.prompt, opts.samples_format, p=p)
