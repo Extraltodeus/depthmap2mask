@@ -68,6 +68,12 @@ You can also just use these functionalities to test out different results.
 - MiDaS models :
 
     I'll let you try what suits your needs the most.
+    
+- Turn the depthmap into absolute black/white
+
+![image](https://user-images.githubusercontent.com/15731540/204057815-1e7d1d38-2fbb-43a1-bb08-133e574138c2.png)
+
+This option will cut out the background of an image into pure black and make the foreground pure white. Like a clean cut.
 
 ## Credits/Citation
 
