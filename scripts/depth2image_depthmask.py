@@ -25,6 +25,9 @@ def module_from_file(module_name, file_path):
 class Script(scripts.Script):
     def title(self):
         return "Depth aware img2img mask"
+    
+    def show(self, is_img2img):
+        return is_img2img
 
     def ui(self, is_img2img):
         if not is_img2img: return
