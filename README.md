@@ -82,8 +82,11 @@ You can also just use these functionalities to test out different results.
 
 This option will cut out the background of an image into pure black and make the foreground pure white. Like a clean cut.
 
-## Credits/Citation
+## Tips
 
+- Avoid using Euler a or you might get really bad results. Usually DDIM works best.
+
+## Credits/Citation
 
 Thanks to [thygate](https://github.com/thygate) for letting me blatantly copy-paste some of his functions for the depth analysis integration in the webui.
 
