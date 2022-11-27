@@ -29,6 +29,9 @@ It creates masks for img2img based on a depth estimation made by [MiDaS](https:/
 
 ![smallerone](https://user-images.githubusercontent.com/15731540/204043576-5dc02def-29f8-423e-a69e-d392f47d3602.png)![5050](https://user-images.githubusercontent.com/15731540/204043582-ae46d0b8-3c4b-43d5-b669-eaf2659ced14.png)
 
+## Where to find it after installing it?
+
+Go to your img2img tab then select it from the custom scripts list at the bottom.
 
 ## Explanations of the different UI elements
 
