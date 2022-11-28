@@ -90,4 +90,5 @@ class Script(scripts.Script):
         if override_mask_blur: p.mask_blur  = 0
         if override_fill: p.inpainting_fill = 1
         proc = process_images(p)
+        proc.images.append(d_m)
         return proc
