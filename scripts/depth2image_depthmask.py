@@ -39,20 +39,21 @@ class Script(scripts.Script):
         with gr.Row():
             invert_depth = gr.Checkbox(label="Invert DepthMap",value=False)
             save_depthmap = gr.Checkbox(label='Save depth map', value=False)
+            save_alpha_crop = gr.Checkbox(label='Save alpha crop', value=False)
             override_mask_blur = gr.Checkbox(label='Override mask blur to 0', value=True)
             override_fill = gr.Checkbox(label='Override inpaint to original', value=True)
             clean_cut     = gr.Checkbox(label='Turn the depthmap into absolute black/white', value=False)
         model_type = gr.Dropdown(label="Model", choices=['dpt_large','midas_v21','midas_v21_small'], value='midas_v21_small', type="index", elem_id="model_type")
         # model_type = gr.Dropdown(label="Model", choices=['dpt_large','dpt_hybrid','midas_v21','midas_v21_small'], value='dpt_large', type="index", elem_id="model_type")
-        return    [save_depthmap,treshold,match_size,net_width,net_height,invert_depth,model_type,override_mask_blur,override_fill,clean_cut]
+        return    [save_depthmap,treshold,match_size,net_width,net_height,invert_depth,model_type,override_mask_blur,override_fill,clean_cut, save_alpha_crop]
 
-    def run(self,p,save_depthmap,treshold,match_size,net_width,net_height,invert_depth,model_type,override_mask_blur,override_fill,clean_cut):
+    def run(self,p,save_depthmap,treshold,match_size,net_width,net_height,invert_depth,model_type,override_mask_blur,override_fill,clean_cut, save_alpha_crop):
         def remap_range(value, minIn, MaxIn, minOut, maxOut):
             if value > MaxIn: value = MaxIn;
             if value < minIn: value = minIn;
             finalValue = ((value - minIn) / (MaxIn - minIn)) * (maxOut - minOut) + minOut;
             return finalValue;
-        def create_depth_mask_from_depth_map(img,save_depthmap,p,treshold,clean_cut):
+        def create_depth_mask_from_depth_map(img,save_depthmap,p,treshold,clean_cut, save_alpha_crop):
             img = copy.deepcopy(img.convert("RGBA"))
             mask_img = copy.deepcopy(img.convert("L"))
             mask_datas = mask_img.getdata()
@@ -81,14 +82,21 @@ class Script(scripts.Script):
         d_m = sdmg.calculate_depth_maps(p.init_images[0],img_x,img_y,model_type,invert_depth)
 
         if treshold > 0 or clean_cut:
-            d_m = create_depth_mask_from_depth_map(d_m,save_depthmap,p,treshold,clean_cut)
+            d_m = create_depth_mask_from_depth_map(d_m,save_depthmap,p,treshold,clean_cut, save_alpha_crop)
 
         if save_depthmap:
             images.save_image(d_m, p.outpath_samples, "", p.seed, p.prompt, opts.samples_format, p=p)
+
+        if save_alpha_crop:
+            alpha_crop = p.init_images[0].copy()
+            alpha_crop.putalpha(d_m.convert("L"))
+            images.save_image(alpha_crop, p.outpath_samples, "alpha-crop", p.seed, p.prompt, opts.samples_format, p=p)
 
         p.image_mask = d_m
         if override_mask_blur: p.mask_blur  = 0
         if override_fill: p.inpainting_fill = 1
         proc = process_images(p)
         proc.images.append(d_m)
+        if save_alpha_crop:
+            proc.images.append(alpha_crop)
         return proc

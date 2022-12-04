@@ -82,6 +82,14 @@ You can also just use these functionalities to test out different results.
 
 This option will cut out the background of an image into pure black and make the foreground pure white. Like a clean cut.
 
+### Alpha Cropping
+
+You can also save a version of the input image which has had all the masked content replaced with transparent pixels. This is useful when extracting the subject from the background, so that it can be used in designs.
+
+![Image](https://i.imgur.com/yFX6LyQ.jpeg)
+
+Simply check the "Save alpha mask" option before generating.
+
 ## Tips
 
 - Avoid using Euler a or you might get really bad results. Usually DDIM works best.
