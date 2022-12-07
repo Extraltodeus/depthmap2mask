@@ -1,11 +1,11 @@
-import torch
+import torch, gc
 import cv2
 import requests
 import os.path
 import contextlib
 from PIL import Image
 from modules.shared import opts, cmd_opts
-from modules import processing, images, shared
+from modules import processing, images, shared, devices
 
 from torchvision.transforms import Compose
 from repositories.midas.midas.dpt_depth import DPTDepthModel
@@ -167,3 +167,5 @@ class SimpleDepthMapGenerator(object):
             raise
         finally:
             del model
+            gc.collect()
+            devices.torch_gc()
