@@ -31,6 +31,21 @@ class Script(scripts.Script):
 
     def ui(self, is_img2img):
         if not is_img2img: return
+        models = ["dpt_beit_large_512",
+                "dpt_beit_large_384",
+                "dpt_beit_base_384",
+                "dpt_swin2_large_384",
+                "dpt_swin2_base_384",
+                "dpt_swin2_tiny_256",
+                "dpt_swin_large_384",
+                "dpt_next_vit_large_384",
+                "dpt_levit_224",
+                "dpt_large_384",
+                "dpt_hybrid_384",
+                "midas_v21_384",
+                "midas_v21_small_256",
+                # "openvino_midas_v21_small_256"
+            ]
 
         treshold = gr.Slider(minimum=0, maximum=255, step=1, label='Contrasts cut level', value=0)
         match_size = gr.Checkbox(label="Match input size",value=True)
@@ -43,7 +58,7 @@ class Script(scripts.Script):
             override_mask_blur = gr.Checkbox(label='Override mask blur to 0', value=True)
             override_fill = gr.Checkbox(label='Override inpaint to original', value=True)
             clean_cut     = gr.Checkbox(label='Turn the depthmap into absolute black/white', value=False)
-        model_type = gr.Dropdown(label="Model", choices=['dpt_large','midas_v21','midas_v21_small'], value='midas_v21_small', type="index", elem_id="model_type")
+        model_type = gr.Dropdown(label="Model", choices=models, value="dpt_swin2_base_384", type="index", elem_id="model_type")
         # model_type = gr.Dropdown(label="Model", choices=['dpt_large','dpt_hybrid','midas_v21','midas_v21_small'], value='dpt_large', type="index", elem_id="model_type")
         return    [save_depthmap,treshold,match_size,net_width,net_height,invert_depth,model_type,override_mask_blur,override_fill,clean_cut, save_alpha_crop]
 
